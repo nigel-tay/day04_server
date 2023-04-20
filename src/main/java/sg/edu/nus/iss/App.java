@@ -30,6 +30,14 @@ public class App
             System.exit(0);
         }
 
+        // Testing the cookie class
+        Cookie cookie = new Cookie();
+        cookie.readCookieFile(filePathName);
+        String myCookie = cookie.getRandomCookie();
+        System.out.println(myCookie);
+        String myCookie2 = cookie.getRandomCookie();
+        System.out.println(myCookie2);
+
         // Slide 8
         ServerSocket ss = new ServerSocket(Integer.parseInt(portNumber));
         Socket socket = ss.accept();
@@ -52,9 +60,12 @@ public class App
                     msgReceived = dis.readUTF();
 
                     if (msgReceived.equals("get-cookie")) {
-                        // instantiate cookie.java
                         // Get random cookie 
+                        String randomCookie = cookie.getRandomCookie();
+
                         // Send it back to client using DataOutputStream (dos.writeUTF(xxxxxxxx))
+                        dos.writeUTF(randomCookie);
+                        dos.flush();
                     }
                 }
                 // close all output stream
